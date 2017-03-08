@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{3D3841C5-214D-52AF-5E07-B1DCB1D67B7C}") = "QRTest", "Assembly-CSharp.csproj", "{FE09D720-1D93-0108-E1D3-044A57AAE120}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE09D720-1D93-0108-E1D3-044A57AAE120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE09D720-1D93-0108-E1D3-044A57AAE120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE09D720-1D93-0108-E1D3-044A57AAE120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE09D720-1D93-0108-E1D3-044A57AAE120}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

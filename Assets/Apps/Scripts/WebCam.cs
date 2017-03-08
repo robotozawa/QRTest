@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WebCam : MonoBehaviour {
 
-	public int FPS = 30;
+	//public int FPS = 30;
 
 	[SerializeField]
 	Camera targetCamera;
@@ -29,7 +29,11 @@ public class WebCam : MonoBehaviour {
 
 	bool init = false;
 
+	float time = 0;
+
 	void Start(){
+		Application.targetFrameRate = 30;
+
 		SetScreenSize ();
 
 		//デバイスを取得
@@ -38,7 +42,7 @@ public class WebCam : MonoBehaviour {
 		if (devices.Length > 0) {
 			cameraNum = devices.Length - 1;
 			selectedCameraId = cameraNum;
-			webcamTexture = new WebCamTexture(devices[selectedCameraId].name,(int)screenSize.y,(int)screenSize.x,FPS);
+			webcamTexture = new WebCamTexture(devices[selectedCameraId].name,(int)screenSize.y,(int)screenSize.x);
 
 			webcamTexture.Play();
 
@@ -72,12 +76,14 @@ public class WebCam : MonoBehaviour {
 	void FitQuadSize(){
 		float h = targetCamera.orthographicSize * 2;
 		float w = h * targetCamera.aspect;
-		transform.localScale = new Vector3 (w, h,1);
+		transform.localScale = new Vector3 (h, w,1);
 		originalSize = transform.localScale;
 
 		var euler = transform.localRotation.eulerAngles;
-		if(Application.platform == RuntimePlatform.IPhonePlayer||Application.platform == RuntimePlatform.Android){
-			transform.localRotation = Quaternion.Euler( euler.x, euler.y, euler.z - 90 );
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			transform.localRotation = Quaternion.Euler (euler.x, euler.y, euler.z - 90);
+		} else if (Application.platform == RuntimePlatform.Android) {
+			transform.localRotation = Quaternion.Euler (euler.x, euler.y, euler.z + 90);
 		}
 	}
 
@@ -102,9 +108,11 @@ public class WebCam : MonoBehaviour {
 	void Update () {
 		//カメラから読み取り
 		if (init) {
-			
-			resultText.text = this.qrManager.read (webcamTexture);
+			time += Time.deltaTime;
+			if (time > 1) {
+				resultText.text = this.qrManager.read (webcamTexture);
+				time = 0;
+			}
 		}
-
 	}
 }
